@@ -1,5 +1,8 @@
+//JavaScript中的正则表达式总结:http://caibaojian.com/javascript-zhengze.html
 // 去掉前后及所有空格
 function trimStr(str,is_global) {
+    //var reg = /^[\u4e00-\u9fa5a-zA-Z]+$/;  //中英文字符匹配
+    //var regNum = /^[0-9]*[1-9][0-9]*$/;  //正整数匹配
     var result;
     result = str.replace(/(^\s*)|(\s*$)/g, "");
     if (is_global.toLowerCase() == "g") {
@@ -28,12 +31,17 @@ function checkCode (value){
         return false;
     }
 }
-
-// 密码验证 [6-18字母数字下划线]
+//  回车键实现click方法
+function keyLogin(event,id){
+    if (event.keyCode==13)  //回车键的键值为13
+        document.getElementById(id).click(); //调用登录按钮的登录事件
+}
+// 密码验证 [6-18位非空字符]
 function checkPassword(value) {
-    var reg=/^(\w){6,20}$/;
+    var reg=/^(\S){6,20}$/;
     if(reg.test(value)) {
         console.log("密码输入正确");
+        console.log(value);
     }else {
         console.log("请输入6-18位密码");
         return false;
@@ -65,9 +73,8 @@ var table = document.getElementById("aqi-table");
 function addAqiData() {
     var reg = /^[\u4e00-\u9fa5a-zA-Z]+$/;  //中英文字符匹配
     var regNum = /^[0-9]*[1-9][0-9]*$/;  //正整数匹配
-
 	//var city = trimStr(city_input.value,"g");
-    var city = checkCode(city_input.value);
+    var city = checkPassword(city_input.value);
     var value = trimStr(value_input.value,"g");
     if(reg.test(city) && regNum.test(value)){
         /*aqiData = [city,value];*/
