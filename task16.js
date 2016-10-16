@@ -1,3 +1,45 @@
+// 去掉前后及所有空格
+function trimStr(str,is_global) {
+    var result;
+    result = str.replace(/(^\s*)|(\s*$)/g, "");
+    if (is_global.toLowerCase() == "g") {
+        result = result.replace(/\s/g, "");
+    }
+    return result;
+}
+
+// 手机号码验证
+function checkMobile (value) {
+    var reg = /^1[34578]\d{9}$/;
+    if(value && reg.test(value)) {
+        console.log("手机号码正确");
+    }else {
+        console.log("请填写正确的手机号码");
+        return false;
+    }
+}
+// 六位数字验证
+function checkCode (value){
+    var reg = /^\d{6}$/;
+    if(reg.test(value)) {
+        console.log("手机验证码正确");
+    }else {
+        console.log("请填写正确的手机验证码");
+        return false;
+    }
+}
+
+// 密码验证 [6-18字母数字下划线]
+function checkPassword(value) {
+    var reg=/^(\w){6,20}$/;
+    if(reg.test(value)) {
+        console.log("密码输入正确");
+    }else {
+        console.log("请输入6-18位密码");
+        return false;
+    }
+}
+
 /**
  * aqiData，存储用户输入的空气指数数据
  * 示例格式：
@@ -19,20 +61,13 @@ var table = document.getElementById("aqi-table");
     用户输入的城市名字和空气质量指数需要进行前后去空格及空字符处理（trim）
     用户输入不合规格时，需要给出提示（允许用alert，也可以自行定义提示方式）
  */
- // 去掉前后及所有空格
-function trimStr(str,is_global) {
-    var result;
-    result = str.replace(/(^\s*)|(\s*$)/g, "");
-    if (is_global.toLowerCase() == "g") {
-        result = result.replace(/\s/g, "");
-    }
-    return result;
-}
+
 function addAqiData() {
     var reg = /^[\u4e00-\u9fa5a-zA-Z]+$/;  //中英文字符匹配
     var regNum = /^[0-9]*[1-9][0-9]*$/;  //正整数匹配
 
-	var city = trimStr(city_input.value,"g");
+	//var city = trimStr(city_input.value,"g");
+    var city = checkCode(city_input.value);
     var value = trimStr(value_input.value,"g");
     if(reg.test(city) && regNum.test(value)){
         /*aqiData = [city,value];*/
