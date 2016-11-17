@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Flexbox</title>
+	<style>
+		.box-container{
+			width: 80%;
+			margin: 60px auto;
+			display: -webkit-flex;
+			display: flex;
+
+			flex-flow: row nowrap;
+			-webkit-flex-flow: row nowrap;
+			justify-content: space-around;
+			align-items: center;
+			background-color: #ccc;
+			height: 620px;
+		}
+		.box-container div {
+			flex-grow: 0;
+			margin: 20px;
+
+		}
+		.box1 {
+			width: 150px;
+			height: 120px;
+			background-color: #f00;
+			border: 1px solid red;
+		}
+		.box2 {
+			width: 150px;
+			height: 100px;
+			border: 1px solid red;
+		}
+		.box3{
+			width: 150px;
+			height: 40px;
+			border: 1px solid red;
+		}
+		.box4 {
+			width: 150px;
+			height: 200px;
+			border: 1px solid blue;
+		}
+		@media screen and (max-width: 640px) {
+			.box-container {
+				align-items: flex-start;
+				flex-flow: row wrap;
+				align-content: flex-start;
+			}
+			.box-container div {
+				flex-shrink: 0;
+			}
+			.box1,.box2,.box3 {
+				order: 1;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="box-container">
+		<div class="box1">
+			
+		</div>
+		<div class="box2">
+			
+		</div>
+		<div class="box3">
+			
+		</div>
+		<div class="box4">
+			
+		</div>
+	</div>
+</body>
+</html>
