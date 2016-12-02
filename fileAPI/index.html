@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        progress {
+            display: inline-block;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+<progress value="22" max="100"></progress>
+
+<from id="form1" enctype="multipart/form-data" method="POST" action="Upload.jsp">
+    <div class="row">
+        <label for="fileToUpload">Select a File to Upload</label>
+        <input type="file" id="fileToUpload"/>
+    </div>
+    <div id="fileName"></div>
+    <div id="fileSize"></div>
+    <div id="fileType"></div>
+    <div class="row">
+        <input type="button" value="Upload"/>
+    </div>
+    <div id="progressNumber">
+
+    </div>
+</from>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
