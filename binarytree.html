@@ -78,8 +78,8 @@
     </div>
 
     <div class="buttons">
-        <button class="insert">插入</button>
-        <button class="order1">先序遍历</button>
+        <!-- <button class="insert">插入</button> -->
+        <button class="order1 bb">先序遍历</button>
         <button class="order2">中序遍历</button>
         <button class="order3">后序遍历</button>
     </div>
@@ -87,26 +87,75 @@
     <script type="text/javascript">
 
         (function() {
-            async function order(node) {
-                await sleep(1000);
-                if(node) {
+            var root = document.querySelector('.root');
+            var buttons = document.querySelector('.buttons');
+            var timer, timer1,timer2;
+            var Orders = {};
 
-                    console.log(node)
+            function show(node) {
 
-                    order(node.children[0])
-                   
-                    order(node.children[1])
+                timer1 = setTimeout(function() {
+                    node.classList.add('red')
+                }, timer+=500)
+
+                timer2 = setTimeout(function() {
+                    node.classList.remove('red')
+                }, timer+=500)
+            }
+
+            Orders = {
+                preOrder(node) {
+                    if(node) {
+
+                        show(node);
+                        this.preOrder(node.children[0])
+                        this.preOrder(node.children[1])
+                    }
+                },
+                inOrder(node) {
+                    if(node) {
+
+                        this.inOrder(node.children[0])
+                        show(node)
+                        this.inOrder(node.children[1])
+                    }
+                },
+                backOrder(node) {
+                    if(node) {
+
+                        this.backOrder(node.children[0])
+                        this.backOrder(node.children[1])
+                        show(node)
+                    }
                 }
-
             }
 
-            function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms))
+            //Orders.preOrder(root);
+            function reset() {
+                timer = 0;
+                clearTimeout(timer1)
+                clearTimeout(timer2)
             }
+            buttons.addEventListener('click', function(e) {
+                console.log(e.target.className)
+                var curClass = e.target.className.split(' ')[0];
+                switch(curClass) {
+                    case 'order1':
+                        reset()
+                        Orders.preOrder(root)
+                        break;
+                    case 'order2':
+                        reset()
+                        Orders.inOrder(root)
+                        break;
+                    case 'order3':
+                    default:
+                        reset()
+                        Orders.backOrder(root)
+                        break;        
+                }
+            }, false)
 
-            var root = document.querySelector('.root')
-            order(root)
-            console.log(root.children)
         })()
     </script>
 
