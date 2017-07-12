@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function Node(data, left, right) {
+            this.data = data;
+            this.left = left;
+            this.right = right;
+
+            
+        }
+
+        class BST {
+            constructor() {
+                this.root = null;
+            }
+
+            insert(data) {
+                var n = new Node(data, null, null);
+
+                if(this.root === null) {
+                    this.root = n;
+                    return;
+                }
+
+                var current = this.root;
+                var parent;
+                while(true) {
+                    parent = current;
+                    if(data < parent.data) {
+                        current = current.left;
+                        if(current === null) {
+                            parent.left = n;
+                            break;
+                        }
+                    }else {
+                        current = current.right;
+                        if(current === null) {
+                            parent.right = n;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // 给定一个节点，遍历二叉树
+            // 先序遍历：根->左->右
+            // 中序遍历：左->根->右
+            // 后序遍历：左->右->根
+            inOrder(node) {
+                if(node !== null) {
+                     console.log(node.data)
+                     this.inOrder(node.left)
+                     this.inOrder(node.right) 
+                } 
+            }
+
+            getMin() {
+                var node = this.root;
+                while(node.left) {
+                    node = node.left;
+                }
+                return node.data;
+            }
+
+            getMax() {
+                var node = this.root;
+                while(node.right) {
+                     node = node.right;
+                }
+                return node.data;
+            }
+
+            findOne(data) {
+                if(data === null || typeof data !== 'number') {
+                    throw new Error('data 错误')
+                }
+
+                var current = this.root;
+
+                while(current) {
+                    if(data === current.data) {
+                        return current.data;
+                    }
+                    else if(data < current.data) {
+                        current = current.left;
+                    }
+                    else {
+                        current = current.right;
+                    }
+                }
+                return null;
+            }
+        }
+
+        var bst = new BST();
+        bst.insert(20)
+        bst.insert(3)
+        bst.insert(66)
+        bst.insert(2)
+        bst.insert(90)
+        bst.insert(8)
+        bst.insert(53)
+        bst.insert(95)
+
+        bst.inOrder(bst.root)
+        console.log('max:' + bst.getMin())
+        console.log('findOne:' + bst.findOne(2))
+
+    </script>
+</body>
+</html>
