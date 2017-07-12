@@ -19,6 +19,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #fff;
         }
         .left,
         .right {
@@ -29,6 +30,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #fff;
         }
         .buttons {
             margin-top: 10px;
@@ -41,7 +43,7 @@
 <body>
     <div class="binary">
         <div class="root">
-            <div class="left red">
+            <div class="left">
                <div class="left">
                    <div class="left">
                        
@@ -83,7 +85,29 @@
     </div>
 
     <script type="text/javascript">
-        
+
+        (function() {
+            async function order(node) {
+                await sleep(1000);
+                if(node) {
+
+                    console.log(node)
+
+                    order(node.children[0])
+                   
+                    order(node.children[1])
+                }
+
+            }
+
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms))
+            }
+
+            var root = document.querySelector('.root')
+            order(root)
+            console.log(root.children)
+        })()
     </script>
 
     <script type="text/javascript">
