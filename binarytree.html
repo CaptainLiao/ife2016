@@ -266,5 +266,81 @@
         console.log('findOne:' + bst.findOne(2))
 
     </script>
+    <script type="text/javascript">
+        function Node(data) {
+            this.data = data;
+            this.left = left;
+            this.right = right;
+        }
+
+        class BST {
+            constructor() {
+                this.root = null;
+            }
+
+            insert(data) {
+                var n = new Node(data);
+                if(!this.root) {
+                    this.root = n;
+                    return;
+                }
+
+                var current = this.root;
+                var parent;
+
+                while(true) {
+                    parent = current;
+                    if(data < current.data) {
+                        current = current.left;
+                        if(current) {
+                            parent.left = n;
+                            break;
+                        }
+                    }
+                    else {
+                        current = current.right;
+                        if(current) {
+                            parent.right = n;
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+            inOrder(data) {
+                while(data) {
+                    console.log(data)
+                    inOrder(data.left)
+                    inOrder(data.right)
+                }
+            }
+
+            getMin() {
+                var current = this.root;
+                while(current.left) {
+                    current = current.left;
+                }
+                return current.data;
+            }
+
+            findOne(data) {
+                var current = this.root;
+
+                while(current) {
+                    if(data === current.data) {
+                        return current
+                    }
+                    else if(data < current.data) {
+                        current = current.left
+                    }
+                    else {
+                        current = current.right;
+                    }
+                }
+                return null;
+            }
+        }
+    </script>
 </body>
 </html>
